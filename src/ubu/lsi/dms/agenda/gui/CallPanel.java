@@ -1,33 +1,43 @@
 package ubu.lsi.dms.agenda.gui;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 
 import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 
 public class CallPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
-	private String[] filterOptions;
+	private JPanel centerPane;
+
+	private JPanel southPane;
 
 	private FilterPanel filterPanel;
 	
-	private JPanel callDataPanel;
+	private CallDataPanel callDataPanel;
+
+	private String[] filterOptions;
 
 	public CallPanel() {
 		
 		setLayout(new BorderLayout());
 		filterOptions = new String[] {"Contact"};
 		
-		callDataPanel = new JPanel();
+		filterPanel = new FilterPanel(filterOptions);		
+		callDataPanel = new CallDataPanel();
 		
-		callDataPanel.setBorder(new TitledBorder(null,
-				"Call Information", TitledBorder.LEADING, TitledBorder.TOP,
-				null, null));
-		filterPanel = new FilterPanel(filterOptions);
+		centerPane = new JPanel();
+		centerPane.setLayout(new GridLayout());
+		centerPane.add(callDataPanel);
 		
-		
+		southPane = new JPanel();
+		southPane.setLayout(new GridLayout(3, 1, 5, 5));
+		southPane.add(filterPanel);
+
+		add(centerPane, BorderLayout.CENTER);
+
+		add(southPane, BorderLayout.SOUTH);
 		
 	}
 

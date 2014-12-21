@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+import javax.swing.border.TitledBorder;
 
 public class FilterPanel extends JPanel {
 
@@ -20,28 +20,40 @@ public class FilterPanel extends JPanel {
 	private JButton clearButton;
 
 	private JComboBox<String> filterBox;
- 
-	public FilterPanel(String [] options) {
+
+	private JPanel optionsPanel;
+
+	private JPanel buttonsPanel;
+
+	public FilterPanel(String[] options) {
+
+		filterText = new JTextField(18);
+		filterButton = new JButton("Filter");
+		clearButton = new JButton("Clear");
+		filterBox = new JComboBox<String>(options);
+
+		optionsPanel = new JPanel();
+		buttonsPanel = new JPanel();
+
+		setLayout(new GridLayout(1, 2));
+		setBorder(new TitledBorder(null, "Filter",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		
-		this.filterText = new JTextField(18);
-		this.filterButton = new JButton("Filter");
-		this.clearButton = new JButton("Clear");
-		this.filterBox = new JComboBox<String>(options);
+		initComponents();
 		
-		JPanel optionsPanel = new JPanel();
+		add(optionsPanel);
+		add(buttonsPanel);
+
+	}
+
+	private void initComponents() {
 		optionsPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		optionsPanel.add(filterBox);
 		optionsPanel.add(filterText);
 
-		JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		buttonsPanel.add(clearButton);
 		buttonsPanel.add(filterButton);
-
-		setLayout(new GridLayout(1, 2));
-		add(optionsPanel);
-		add(buttonsPanel);
-
 	}
 
 }

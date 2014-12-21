@@ -14,7 +14,6 @@ public class MainWindow extends JFrame {
 	private Container contents;
 
 	private JPanel contactTab;
-	private JPanel ctTab;
 	private JPanel callTab;
 
 	private JTabbedPane tabbedPane;
@@ -26,8 +25,7 @@ public class MainWindow extends JFrame {
 		tabbedPane = new JTabbedPane();
 
 		contactTab = new ContactPanel();
-		ctTab = new JPanel();
-		callTab = new JPanel();
+		callTab = new CallPanel();
 
 		init();
 		pack();
@@ -39,9 +37,8 @@ public class MainWindow extends JFrame {
 
 		tabbedPane.addTab("Contacts", contactTab);
 
-		tabbedPane.addTab("Contact Types", ctTab);
-
 		tabbedPane.addTab("Calls", callTab);
+
 
 		contents.add(tabbedPane);
 	}

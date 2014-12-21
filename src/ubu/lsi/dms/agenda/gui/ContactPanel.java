@@ -9,11 +9,11 @@ public class ContactPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private JPanel northPane;
 	private JPanel centerPane;
+	
 	private JPanel southPane;
 
-	private JPanel filterPanel;
+	private FilterPanel filterPanel;
 
 	private ContactDataPanel contactDataPanel;
 
@@ -27,9 +27,6 @@ public class ContactPanel extends JPanel {
 		filterPanel = new FilterPanel(filterOptions);
 		contactDataPanel = new ContactDataPanel();
 
-		northPane = new JPanel();
-		northPane.setLayout(new GridLayout(1, 2, 5, 5));
-
 		centerPane = new JPanel();
 		centerPane.setLayout(new GridLayout());
 		centerPane.add(contactDataPanel);
@@ -38,7 +35,7 @@ public class ContactPanel extends JPanel {
 		southPane.setLayout(new GridLayout(3, 1, 5, 5));
 		southPane.add(filterPanel);
 
-		add(centerPane, BorderLayout.WEST);
+		add(centerPane, BorderLayout.CENTER);
 
 		add(southPane, BorderLayout.SOUTH);
 
