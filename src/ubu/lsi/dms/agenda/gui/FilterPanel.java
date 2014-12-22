@@ -36,17 +36,18 @@ public class FilterPanel extends JPanel {
 		buttonsPanel = new JPanel();
 
 		setLayout(new GridLayout(1, 2));
-		setBorder(new TitledBorder(null, "Filter",
-				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		
+		setBorder(new TitledBorder(null, "Filter", TitledBorder.LEADING,
+				TitledBorder.TOP, null, null));
+
 		initComponents();
-		
+
 		add(optionsPanel);
 		add(buttonsPanel);
 
 	}
 
 	private void initComponents() {
+
 		optionsPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		optionsPanel.add(filterBox);
 		optionsPanel.add(filterText);
@@ -54,6 +55,7 @@ public class FilterPanel extends JPanel {
 		buttonsPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		buttonsPanel.add(clearButton);
 		buttonsPanel.add(filterButton);
+
 	}
 
 }

@@ -34,19 +34,17 @@ public class CallDataPanel extends JPanel {
 		constraints = new GridBagConstraints();
 
 		setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-		setPreferredSize(new Dimension(640, 320));
+		setPreferredSize(new Dimension(320, 200));
+		setBorder(new TitledBorder(null, "Details",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
 		initComponents();
 
-		callInfoPanel.setPreferredSize(new Dimension(300, 200));
 		add(callInfoPanel);
 
 	}
 
 	private void initComponents() {
-
-		callInfoPanel.setBorder(new TitledBorder(null, "Call Information",
-				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
 		callInfoPanel.setLayout(new GridBagLayout());
 

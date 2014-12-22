@@ -21,8 +21,7 @@ public class AddChangeButtonPanel extends JPanel {
 		
 		add(addButton);
 		add(changeButton);
-		
-		
+			
 	}
 
 }

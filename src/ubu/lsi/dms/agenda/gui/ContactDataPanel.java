@@ -46,13 +46,12 @@ public class ContactDataPanel extends JPanel {
 	public ContactDataPanel() {
 
 		setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-
-		setPreferredSize(new Dimension(630, 270));
+		setPreferredSize(new Dimension(640, 270));
 
 		initComponents();
-		personalInfoPanel.setPreferredSize(new Dimension(620, 130));
+		
 		add(personalInfoPanel);
-		workInfoPanel.setPreferredSize(new Dimension(620, 130));
+		
 		add(workInfoPanel);
 
 	}
@@ -65,6 +64,7 @@ public class ContactDataPanel extends JPanel {
 
 		/* INITIALIZATION OF PERSONAL INFO PANEL */
 		personalInfoPanel.setLayout(new GridBagLayout());
+		personalInfoPanel.setPreferredSize(new Dimension(620, 130));
 		personalInfoPanel.setBorder(new TitledBorder(null,
 				"Personal Information", TitledBorder.LEADING, TitledBorder.TOP,
 				null, null));
@@ -170,6 +170,7 @@ public class ContactDataPanel extends JPanel {
 
 		/* INITIALIZATION OF PROFESSIONAL INFO PANEL */
 		workInfoPanel.setLayout(new GridBagLayout());
+		workInfoPanel.setPreferredSize(new Dimension(620, 130));
 		workInfoPanel.setBorder(new TitledBorder(null,
 				"Professional Information", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
