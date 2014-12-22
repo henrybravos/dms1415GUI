@@ -47,7 +47,7 @@ public class ContactDataPanel extends JPanel {
 
 		setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
-		setPreferredSize(new Dimension(640, 320));
+		setPreferredSize(new Dimension(630, 270));
 
 		initComponents();
 		personalInfoPanel.setPreferredSize(new Dimension(620, 130));

@@ -1,6 +1,8 @@
 package ubu.lsi.dms.agenda.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
@@ -19,6 +21,10 @@ public class ContactPanel extends JPanel {
 
 	private String[] filterOptions;
 
+	private InsertButtonsPanel insertButtonsPanel;
+
+	private AddChangeButtonPanel addChangeButtonPanel;
+
 	public ContactPanel() {
 
 		setLayout(new BorderLayout());
@@ -26,16 +32,20 @@ public class ContactPanel extends JPanel {
 
 		filterPanel = new FilterPanel(filterOptions);
 		contactDataPanel = new ContactDataPanel();
+		insertButtonsPanel = new InsertButtonsPanel();
+		addChangeButtonPanel = new AddChangeButtonPanel();
 
 		centerPane = new JPanel();
-		centerPane.setLayout(new GridLayout());
+		centerPane.setLayout(new FlowLayout(FlowLayout.LEFT,5,5));
 		centerPane.add(contactDataPanel);
+//		centerPane.add(insertButtonsPanel);
+//		centerPane.add(addChangeButtonPanel);
 
 		southPane = new JPanel();
 		southPane.setLayout(new GridLayout(3, 1, 5, 5));
 		southPane.add(filterPanel);
 
-		add(centerPane, BorderLayout.CENTER);
+		add(centerPane, BorderLayout.WEST);
 
 		add(southPane, BorderLayout.SOUTH);
 
