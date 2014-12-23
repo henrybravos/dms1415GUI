@@ -76,11 +76,11 @@ public class ContactPanel extends JPanel {
 		initComponents();
 
 		insertButtonsPanel
-				.setInsertarContactoListener(new InsertarContactoListener());
+				.setInsertarListener(new InsertarContactoListener());
 		insertButtonsPanel
-				.setLimpiarContactoListener(new LimpiarContactoListener());
+				.setLimpiarListener(new LimpiarContactoListener());
 		insertButtonsPanel
-				.setActualizarContactoListener(new ActualizarContactoListener());
+				.setActualizarListener(new ActualizarContactoListener());
 
 		filterPanel.setFiltrarContactoListener(new FiltrarContactoListener());
 		filterPanel.setLimpiarFiltroContactoListener(new LimpiarFiltroContactoListener());

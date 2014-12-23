@@ -1,6 +1,6 @@
 package ubu.lsi.dms.agenda.gui;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -84,46 +84,22 @@ public class AdaptadorLlamada extends AbstractTableModel{
 		
 	}
 
-
-/*
-	@Override
-	public boolean isCellEditable(int arg0, int arg1) {
-		if(arg1==0)
-			return false;
-		return true;
-	}
-
-
-	@Override
-	public void setValueAt(Object arg0, int arg1, int arg2) {
-		//Conseguimos el llamada deseado
-		
-		
+	public int getHigherID(){
+		int higherID=-1;
+		//Conseguimos el contacto deseado	
 		Iterator<Llamada> iterador = totalLlamadas.iterator();
 		Llamada llamada=null;
-		for (int i = 0; i == arg1; i++) {
+		for (int i = 0; i <= totalLlamadas.size()-1; i++) {
 			llamada = (Llamada) iterador.next();
+			if(higherID<llamada.getIdLlamada())
+				higherID=llamada.getIdLlamada();
 		}
-		//Elegimos el atributo deseado indicado
-		switch (arg1) {
-
-		case 1:
-			llamada.setContacto((Contacto) arg0);
-			fireTableCellUpdated(arg1,arg2);
-		case 2:
-			llamada.setFechaLlamada((String) arg0);
-			fireTableCellUpdated(arg1,arg2);
-			
-		case 3:
-			llamada.setAsunto((String) arg0);
-			fireTableCellUpdated(arg1,arg2);
-		case 4:
-			llamada.setNotas((String) arg0);
-			fireTableCellUpdated(arg1,arg2);
-		}
-		
+		return higherID;
 	}
 
-	*/
+	public void addRow(Llamada llamada) {
+		totalLlamadas.add(llamada);
+		
+	}
 	
 }
