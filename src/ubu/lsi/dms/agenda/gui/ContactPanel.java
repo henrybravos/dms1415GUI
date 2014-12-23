@@ -1,13 +1,9 @@
 package ubu.lsi.dms.agenda.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -32,8 +28,6 @@ public class ContactPanel extends JPanel {
 
 	private JPanel southPane;
 	
-	private JPanel northPane;
-
 	private FilterPanel filterPanel;
 	
 	private ContactTable tablePanel;
@@ -49,8 +43,6 @@ public class ContactPanel extends JPanel {
 	private AdaptadorTipoContacto adaptadorTipoContacto;
 	private AdaptadorContacto adaptadorContacto;
 	private AdaptadorLlamada adaptadorLlamada;
-
-
 
 	public ContactPanel(AdaptadorContacto adaptadorContacto, AdaptadorLlamada adaptadorLlamada, AdaptadorTipoContacto adaptadorTipoContacto) {
 
@@ -92,8 +84,6 @@ public class ContactPanel extends JPanel {
 
 	private void initComponents() {
 				
-		
-		
 		// WEST PANE INITIALIZATION
 		westPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		westPane.setPreferredSize(new Dimension(650, 340));
@@ -104,14 +94,13 @@ public class ContactPanel extends JPanel {
 
 		// EAST PANE INITIALIZATION
 		eastPane.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-//		eastPane.setPreferredSize(new Dimension(650, 340));
 		eastPane.setBorder(new TitledBorder(null, "Contact type",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		eastPane.add(addChangeButtonPanel);
 
 		// SOUTH PANE INITIALIZATION
-		southPane.setLayout(new GridLayout(0,1));
-		southPane.setPreferredSize(new Dimension(840, 150));
+		southPane.setLayout(new GridLayout(2,1));
+		southPane.setPreferredSize(new Dimension(650, 200));
 		southPane.add(new JScrollPane(tablePanel));
 		southPane.add(filterPanel);
 		
@@ -121,7 +110,7 @@ public class ContactPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//Cogemos el modelo de la tabla
-			TableModel modelo = tablePanel.getTablaPrueba().getModel();
+			TableModel modelo = tablePanel.getModel();
 			//Para calcular el ID cogemos el ID del último contacto añadido y le vamos a sumar uno
 			int idContacto = (int) modelo.getValueAt(modelo.getRowCount()-1, 0) + 1;
 			String nombre = contactDataPanel.getNameField().getText();
@@ -170,7 +159,7 @@ public class ContactPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			TableRowSorter<AdaptadorContacto> contactosFiltradosApellido = new TableRowSorter<AdaptadorContacto>(adaptadorContacto);
-			tablePanel.getTablaPrueba().setRowSorter(contactosFiltradosApellido);
+			tablePanel.setRowSorter(contactosFiltradosApellido);
 			
 			contactosFiltradosApellido.setRowFilter(RowFilter.regexFilter((String)filterPanel.getFilterText().getText(), 2));
 			
@@ -183,7 +172,7 @@ public class ContactPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			TableRowSorter<AdaptadorContacto> contactosFiltradosApellido = new TableRowSorter<AdaptadorContacto>(adaptadorContacto);
-			tablePanel.getTablaPrueba().setRowSorter(contactosFiltradosApellido);
+			tablePanel.setRowSorter(contactosFiltradosApellido);
 			
 			contactosFiltradosApellido.setRowFilter(RowFilter.regexFilter("", 0));
 			
