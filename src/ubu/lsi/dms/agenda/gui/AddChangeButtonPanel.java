@@ -1,6 +1,7 @@
 package ubu.lsi.dms.agenda.gui;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -29,5 +30,35 @@ public class AddChangeButtonPanel extends JPanel {
 		add(changeButton);
 			
 	}
+
+	/**
+	 * @return the addButton
+	 */
+	public JButton getAddButton() {
+		return addButton;
+	}
+
+	/**
+	 * @return the changeButton
+	 */
+	public JButton getChangeButton() {
+		return changeButton;
+	}
+
+	/**
+	 * @return the contactTypeField
+	 */
+	public JTextField getContactTypeField() {
+		return contactTypeField;
+	}
+	
+	public void setInsertarTipoContactoListener(ActionListener l) {
+		addButton.addActionListener(l);
+	}
+
+	public void setAcualizarTipoContactoListener(ActionListener l) {
+		changeButton.addActionListener(l);
+	}
+	
 
 }

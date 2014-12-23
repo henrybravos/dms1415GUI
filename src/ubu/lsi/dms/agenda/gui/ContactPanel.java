@@ -46,6 +46,7 @@ public class ContactPanel extends JPanel {
 	private AdaptadorContacto adaptadorContacto;
 	private AdaptadorLlamada adaptadorLlamada;
 	int IDContactoActualizado;
+	int IDTipoContactoActualizado;
 
 	public ContactPanel(AdaptadorContacto adaptadorContacto,
 			AdaptadorLlamada adaptadorLlamada,
@@ -83,6 +84,10 @@ public class ContactPanel extends JPanel {
 
 		filterPanel.setFiltrarContactoListener(new FiltrarContactoListener());
 		filterPanel.setLimpiarFiltroContactoListener(new LimpiarFiltroContactoListener());
+		
+		addChangeButtonPanel.setInsertarTipoContactoListener(new InsertarTipoContactoListener());
+		addChangeButtonPanel.setAcualizarTipoContactoListener(new ActualizarTipoContactoListener());
+
 
 
 		add(westPane, BorderLayout.WEST);
@@ -109,6 +114,8 @@ public class ContactPanel extends JPanel {
 		contactTypeTable.setPreferredScrollableViewportSize(new Dimension(200,
 				80));
 		eastPane.add(new JScrollPane(contactTypeTable));
+
+		contactTypeTable.addMouseListener(new clickSobreTablaTipoContactoListener());
 		eastPane.add(addChangeButtonPanel);
 
 		// SOUTH PANE INITIALIZATION
@@ -352,7 +359,82 @@ public class ContactPanel extends JPanel {
 					.regexFilter("", 0));
 
 		}
-
 	}
+	
+	private class InsertarTipoContactoListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// Cogemos el modelo de la tabla
+			TableModel modelo = contactTypeTable.getModel();
+			// Para calcular el ID cogemos el ID del último contacto añadido y
+			// le vamos a sumar uno
+			int idTipoContacto = (int) modelo.getValueAt(modelo.getRowCount()-1, 0) +1;
+			String tipoContacto = addChangeButtonPanel.getContactTypeField().getText();
+		
+			TipoContacto tipodecontacto = new TipoContacto(idTipoContacto,tipoContacto);
+
+			adaptadorTipoContacto.addRow(tipodecontacto);
+
+		}
+	}
+	
+	private class clickSobreTablaTipoContactoListener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			if (e.getClickCount() == 2) {
+				// Cogemos el modelo de la tabla
+				TableModel modelo = contactTypeTable.getModel();
+
+				int fila = contactTable.rowAtPoint(e.getPoint());
+
+				IDTipoContactoActualizado = ((int) modelo.getValueAt(fila, 0));
+
+				System.out.println(IDTipoContactoActualizado);
+				if ((fila > -1)) {
+					addChangeButtonPanel.getContactTypeField().setText(
+							(String) modelo.getValueAt(fila, 1));
+				}
+			}
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {			
+		}
+	
+	
+	}
+	
+	
+	private class ActualizarTipoContactoListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// Cogemos el modelo de la tabla
+			TableModel modelo = contactTable.getModel();
+			// Para calcular el ID cogemos el ID del último contacto añadido y
+			// le vamos a sumar uno
+			int idContacto = IDTipoContactoActualizado;
+			String tipoContacto = addChangeButtonPanel.getContactTypeField().getText();;
+
+			TipoContacto tipodecontacto = new TipoContacto(idContacto,tipoContacto);
+
+			adaptadorTipoContacto.actualizarRow(tipodecontacto);
+
+		}
+	}
+	
+	
 
 }

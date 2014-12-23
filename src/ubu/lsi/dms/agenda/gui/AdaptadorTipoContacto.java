@@ -80,6 +80,28 @@ public class AdaptadorTipoContacto extends AbstractTableModel{
 	public Collection<TipoContacto> getTotalTipoContacto() {
 		return totalTipoContacto;
 	}
+	
+	public void addRow(TipoContacto tipocontacto) {
+		totalTipoContacto.add(tipocontacto);
+		
+	}
 
+	
+	public void actualizarRow(TipoContacto tipocontactoActualizar) {
+		//Conseguimos el contacto deseado	
+		Iterator<TipoContacto> iterador = totalTipoContacto.iterator();
+		TipoContacto tipocontactoActual=null;
+		for (int i = 0; i <= totalTipoContacto.size()-1; i++) {
+			tipocontactoActual = iterador.next();
+			if(tipocontactoActual.getIdTipoContacto()==tipocontactoActualizar.getIdTipoContacto()){
+				totalTipoContacto.remove(tipocontactoActual);
+				totalTipoContacto.add(tipocontactoActualizar);
+				return;
+			}
+			
+		}
+	}
+	
+	
 
 }
