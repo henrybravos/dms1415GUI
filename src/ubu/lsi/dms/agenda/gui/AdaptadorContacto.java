@@ -128,85 +128,48 @@ public class AdaptadorContacto extends AbstractTableModel{
 		
 	}
 
-
-	
-	/*
-	@Override
-	public boolean isCellEditable(int row, int column){
-		if(column==0)
-			return false;
-		return true;
+	/**
+	 * @return the totalContactos
+	 */
+	public Collection<Contacto> getTotalContactos() {
+		return totalContactos;
 	}
 	
-	public void setValueAt(Object valor, int fila, int columna){
-
+	
+	public int getHigherID(){
+		int higherID=-1;
+		//Conseguimos el contacto deseado	
 		Iterator<Contacto> iterador = totalContactos.iterator();
 		Contacto contacto=null;
-		for (int i = 0; i == fila; i++) {
+		for (int i = 0; i <= totalContactos.size()-1; i++) {
 			contacto = (Contacto) iterador.next();
+			if(higherID<contacto.getIdContacto())
+				higherID=contacto.getIdContacto();
 		}
-		
-		//Elegimos el atributo deseado indicado
-		switch (columna) {
-		case 1:
-			contacto.setNombre((String) valor);
-			fireTableCellUpdated(fila,columna);
-		case 2:
-			contacto.setApellidos((String) valor);
-			fireTableCellUpdated(fila,columna);
-		case 3:
-			contacto.setEstimado((String) valor);
-			fireTableCellUpdated(fila,columna);
-		case 4:
-			contacto.setDireccion((String) valor);
-			fireTableCellUpdated(fila,columna);
-		case 5:
-			contacto.setCiudad((String) valor);
-			fireTableCellUpdated(fila,columna);
-		case 6:
-			contacto.setProv((String) valor);
-			fireTableCellUpdated(fila,columna);
-		case 7:
-			contacto.setCodPostal((String) valor);
-			fireTableCellUpdated(fila,columna);
-		case 8:
-			contacto.setRegion((String) valor);
-			fireTableCellUpdated(fila,columna);
-		case 9:
-			contacto.setPais((String) valor);
-			fireTableCellUpdated(fila,columna);
-		case 10:
-			contacto.setNombreCompania((String) valor);
-			fireTableCellUpdated(fila,columna);
-		case 11:
-			contacto.setCargo((String) valor);
-			fireTableCellUpdated(fila,columna);
-		case 12:
-			contacto.setTelefonoTrabajo((String) valor);
-			fireTableCellUpdated(fila,columna);
-		case 13:
-			contacto.setExtensionTrabajo((String) valor);
-			fireTableCellUpdated(fila,columna);
-		case 14:
-			contacto.setTelefonoMovil((String) valor);
-			fireTableCellUpdated(fila,columna);
-		case 15:
-			contacto.setNumFax((String) valor);
-			fireTableCellUpdated(fila,columna);
-		case 16:
-			contacto.setNomCorreoElectronico((String) valor);
-			fireTableCellUpdated(fila,columna);
-		case 17:
-			contacto.setNotas((String) valor);
-			fireTableCellUpdated(fila,columna);
-		case 18:
-			contacto.setTipoContacto((TipoDeContacto) valor);
-			fireTableCellUpdated(fila,columna);
+		return higherID;
+	}
+	
+
+	public void actualizarRow(Contacto contactoActualizar) {
+		//Conseguimos el contacto deseado	
+		Iterator<Contacto> iterador = totalContactos.iterator();
+		Contacto contactoActual=null;
+		for (int i = 0; i <= totalContactos.size()-1; i++) {
+			contactoActual = iterador.next();
+			if(contactoActual.getIdContacto()==contactoActualizar.getIdContacto()){
+				totalContactos.remove(contactoActual);
+				totalContactos.add(contactoActualizar);
+				return;
+			}
+			
 		}
 		
 		
 	}
-	*/
+
+
+	
+
 	
 	
 	

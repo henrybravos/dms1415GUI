@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
 public class CallPanel extends JPanel {
@@ -15,12 +16,16 @@ public class CallPanel extends JPanel {
 	private JPanel westPane;
 
 	private JPanel southPane;
+	
+	private JPanel eastPane;
 
 	private FilterPanel filterPanel;
 
 	private CallDataPanel callDataPanel;
 
 	private String[] filterOptions;
+	
+	private CallTable callsTable;
 
 	private InsertButtonsPanel insertButtonsPanel;
 	
@@ -40,15 +45,17 @@ public class CallPanel extends JPanel {
 		filterPanel = new FilterPanel(filterOptions);
 		callDataPanel = new CallDataPanel();
 		insertButtonsPanel = new InsertButtonsPanel();
+		callsTable = new CallTable(adaptadorLlamada);
 
 		westPane = new JPanel();
 		southPane = new JPanel();
+		eastPane = new JPanel();
 		
 		initComponents();
 
 		add(westPane, BorderLayout.WEST);
 		add(southPane, BorderLayout.SOUTH);
-
+		add(eastPane, BorderLayout.CENTER);
 	}
 
 	private void initComponents() {
@@ -60,6 +67,13 @@ public class CallPanel extends JPanel {
 				TitledBorder.TOP, null, null));
 		westPane.add(callDataPanel);
 		westPane.add(insertButtonsPanel);
+		
+		//EAST PANE INITIALIZATION
+		eastPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		westPane.setBorder(new TitledBorder(null, "Calls table", TitledBorder.LEADING,
+				TitledBorder.TOP, null, null));
+		eastPane.add(callsTable);
+		eastPane.add(new JScrollPane(callsTable));
 
 		// SOUTH PANE INITIALIZATION
 		southPane.setLayout(new GridLayout(3, 1, 5, 5));

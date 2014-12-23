@@ -31,6 +31,18 @@ public class InsertButtonsPanel extends JPanel {
 	public void setInsertarContactoListener(ActionListener l) {
 		addButton.addActionListener(l);
 	}
-	
 
+
+	public void setLimpiarContactoListener(ActionListener l) {
+		clearButton.addActionListener(l);
+	}
+	
+	
+	
+	public void setActualizarContactoListener(ActionListener l) {
+		changeButton.addActionListener(l);
+	}
+	
+	
+	
 }

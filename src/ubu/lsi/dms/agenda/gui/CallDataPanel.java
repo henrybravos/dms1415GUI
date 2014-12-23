@@ -5,7 +5,10 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -16,8 +19,9 @@ import javax.swing.border.TitledBorder;
 public class CallDataPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	
-	private JTextField contactField;
+
+	private JComboBox contactComboBox;
+//	private JTextField contactField;
 	private JTextField dayField;
 	private JTextField monthField;
 	private JTextField yearField;
@@ -52,11 +56,17 @@ public class CallDataPanel extends JPanel {
 				GridBagConstraints.NONE);
 		callInfoPanel.add(new JLabel("Contact:"), constraints);
 
-		contactField = new JTextField(4);
+		//
+		contactComboBox = new JComboBox<String>();
+		setConstraints(1, 0, 1, GridBagConstraints.WEST,
+				GridBagConstraints.NONE);
+		callInfoPanel.add(contactComboBox, constraints);
+		
+/*		contactField = new JTextField(4);
 		setConstraints(1, 0, 1, GridBagConstraints.WEST,
 				GridBagConstraints.NONE);
 		callInfoPanel.add(contactField, constraints);
-
+*/
 		setConstraints(2, 0, 1, GridBagConstraints.WEST,
 				GridBagConstraints.NONE);
 		callInfoPanel.add(new JLabel("Date:"), constraints);
@@ -69,7 +79,7 @@ public class CallDataPanel extends JPanel {
 
 		setConstraints(4, 0, 1, GridBagConstraints.WEST,
 				GridBagConstraints.NONE);
-		callInfoPanel.add(new JLabel(" - "), constraints);
+		callInfoPanel.add(new JLabel("-"), constraints);
 
 		monthField = new JTextField(2);
 		monthField.setText("MM");
@@ -79,7 +89,7 @@ public class CallDataPanel extends JPanel {
 
 		setConstraints(6, 0, 1, GridBagConstraints.WEST,
 				GridBagConstraints.NONE);
-		callInfoPanel.add(new JLabel(" - "), constraints);
+		callInfoPanel.add(new JLabel("-"), constraints);
 
 		yearField = new JTextField(4);
 		yearField.setText("YYYY");
@@ -131,4 +141,11 @@ public class CallDataPanel extends JPanel {
 		constraints.fill = fill;
 		constraints.insets = new Insets(0, 0, 5, 5);
 	} // setConstraints
+	
+
+	
+	
+	
+	
+	
 }

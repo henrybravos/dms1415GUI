@@ -92,7 +92,7 @@ public class FilterPanel extends JPanel {
 	public JComboBox<String> getFilterBox() {
 		return filterBox;
 	}
-
+	
 	public void setFiltrarContactoListener(ActionListener l) {
 		filterButton.addActionListener(l);
 	}
