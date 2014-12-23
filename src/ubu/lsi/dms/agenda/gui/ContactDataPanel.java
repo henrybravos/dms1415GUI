@@ -34,10 +34,7 @@ public class ContactDataPanel extends JPanel {
 	private JTextField notesField;
 	private JTextField faxField;
 	private JTextField emailField;
-	private JComboBox<String> ContactTypeComboBox;
-	
-	private AdaptadorTipoContacto adaptadorTipoContacto;
-	
+	private JComboBox<String> contactTypeComboBox;
 
 	private JTable tablaPrueba;
 
@@ -46,9 +43,11 @@ public class ContactDataPanel extends JPanel {
 	private JPanel personalInfoPanel;
 	private JPanel workInfoPanel;
 
-	public ContactDataPanel(AdaptadorTipoContacto adaptadorTipoContacto) {
+	private String[] comboBoxOptionsList;
 
-		this.adaptadorTipoContacto = adaptadorTipoContacto;
+	public ContactDataPanel(String[] contactTypes) {
+		
+		comboBoxOptionsList = contactTypes;
 		
 		setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		setPreferredSize(new Dimension(640, 270));
@@ -56,7 +55,6 @@ public class ContactDataPanel extends JPanel {
 		initComponents();
 
 		add(personalInfoPanel);
-
 		add(workInfoPanel);
 
 	}
@@ -257,43 +255,29 @@ public class ContactDataPanel extends JPanel {
 				GridBagConstraints.HORIZONTAL);
 		workInfoPanel.add(emailField, constraints);
 
-		// Notes label
+		// Contact type label
 		setConstraints(0, 3, 1, GridBagConstraints.WEST,
+				GridBagConstraints.NONE);
+		workInfoPanel.add(new JLabel("Type:"), constraints);
+
+		// Contact type combo box
+		contactTypeComboBox = new JComboBox<String>(comboBoxOptionsList);
+		setConstraints(1, 3, 3, GridBagConstraints.CENTER,
+				GridBagConstraints.HORIZONTAL);
+		workInfoPanel.add(contactTypeComboBox, constraints);
+
+		// Notes label
+		setConstraints(4, 3, 1, GridBagConstraints.WEST,
 				GridBagConstraints.NONE);
 		workInfoPanel.add(new JLabel("Notes:"), constraints);
 
 		// Notes text field
-		notesField = new JTextField(45);
-		setConstraints(1, 3, 4, GridBagConstraints.CENTER,
+		notesField = new JTextField(25);
+		setConstraints(5, 3, 5, GridBagConstraints.CENTER,
 				GridBagConstraints.HORIZONTAL);
 		workInfoPanel.add(notesField, constraints);
-		
-		
-		//TODO
-		// Notes label
-		setConstraints(0, 4, 1, GridBagConstraints.WEST,
-				GridBagConstraints.NONE);
-		workInfoPanel.add(new JLabel("Tipo contacto:"), constraints);
-		
-		//ComboBox
-		ContactTypeComboBox = new JComboBox<String>(cogerTiposDeContacto());
-		setConstraints(5, 4, 3, GridBagConstraints.CENTER,
-				GridBagConstraints.HORIZONTAL);
-		workInfoPanel.add(ContactTypeComboBox);
 
 	} // initPanels
-	
-	
-	
-	private String[] cogerTiposDeContacto(){
-		String[] tiposDeContacto = new String[adaptadorTipoContacto.getRowCount()];
-		
-		for(int i=0;i<adaptadorTipoContacto.getRowCount();i++)
-			tiposDeContacto[i] = (String) adaptadorTipoContacto.getValueAt(i, 1);
-		
-		return tiposDeContacto;
-	}
-	
 
 	/**
 	 * Sets different parameters of the GridBagConstraints instance used in
@@ -478,9 +462,7 @@ public class ContactDataPanel extends JPanel {
 	 * @return the contactTypeComboBox
 	 */
 	public JComboBox<String> getContactTypeComboBox() {
-		return ContactTypeComboBox;
+		return contactTypeComboBox;
 	}
-
-
 
 }

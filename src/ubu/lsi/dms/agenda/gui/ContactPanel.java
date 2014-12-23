@@ -1,13 +1,18 @@
 package ubu.lsi.dms.agenda.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.RowFilter;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableModel;
@@ -31,7 +36,7 @@ public class ContactPanel extends JPanel {
 
 	private FilterPanel filterPanel;
 	
-	private TablePanel tablePanel;
+	private ContactTable tablePanel;
 
 	private ContactDataPanel contactDataPanel;
 
@@ -40,12 +45,12 @@ public class ContactPanel extends JPanel {
 	private InsertButtonsPanel insertButtonsPanel;
 
 	private AddChangeButtonPanel addChangeButtonPanel;
-	
-	
+		
 	private AdaptadorTipoContacto adaptadorTipoContacto;
 	private AdaptadorContacto adaptadorContacto;
 	private AdaptadorLlamada adaptadorLlamada;
-	
+
+
 
 	public ContactPanel(AdaptadorContacto adaptadorContacto, AdaptadorLlamada adaptadorLlamada, AdaptadorTipoContacto adaptadorTipoContacto) {
 
@@ -57,56 +62,61 @@ public class ContactPanel extends JPanel {
 
 		filterOptions = new String[] { "Surname" };
 		filterPanel = new FilterPanel(filterOptions);
-		tablePanel =  new TablePanel(adaptadorContacto);
-		contactDataPanel = new ContactDataPanel(adaptadorTipoContacto);
+		tablePanel =  new ContactTable(adaptadorContacto);
+		contactDataPanel = new ContactDataPanel(cogerTiposDeContacto());
 		insertButtonsPanel = new InsertButtonsPanel();
 		addChangeButtonPanel = new AddChangeButtonPanel();
 
 		westPane = new JPanel();
 		eastPane = new JPanel();
 		southPane = new JPanel();
-		northPane =  new JPanel();
 
 		initComponents();
 		
 		insertButtonsPanel.setInsertarContactoListener(new InsertarContactoListener());
-		filterPanel.setFiltrarContactoListener(new FiltrarContactoListener());
-		filterPanel.setLimpiarFiltroContactoListener(new LimpiarFiltroContactoListener());
+
 		add(westPane, BorderLayout.WEST);
 		add(eastPane, BorderLayout.EAST);
 		add(southPane, BorderLayout.SOUTH);
-		add(northPane, BorderLayout.NORTH);
 
+	}
+	
+	private String[] cogerTiposDeContacto(){
+		String[] tiposDeContacto = new String[adaptadorTipoContacto.getRowCount()];
+		
+		for(int i=0;i<adaptadorTipoContacto.getRowCount();i++)
+			tiposDeContacto[i] = (String) adaptadorTipoContacto.getValueAt(i, 1);
+		
+		return tiposDeContacto;
 	}
 
 	private void initComponents() {
-
+				
+		
+		
 		// WEST PANE INITIALIZATION
 		westPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		westPane.setPreferredSize(new Dimension(650, 340));
 		westPane.setBorder(new TitledBorder(null, "Contact",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-
 		westPane.add(contactDataPanel);
 		westPane.add(insertButtonsPanel);
 
 		// EAST PANE INITIALIZATION
 		eastPane.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-		westPane.setPreferredSize(new Dimension(650, 340));
+//		eastPane.setPreferredSize(new Dimension(650, 340));
 		eastPane.setBorder(new TitledBorder(null, "Contact type",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		eastPane.add(addChangeButtonPanel);
 
 		// SOUTH PANE INITIALIZATION
-		southPane.setLayout(new GridLayout(3, 1, 5, 5));
+		southPane.setLayout(new GridLayout(0,1));
+		southPane.setPreferredSize(new Dimension(840, 150));
+		southPane.add(new JScrollPane(tablePanel));
 		southPane.add(filterPanel);
 		
-		//NORTH PANE
-		northPane.setLayout(new GridLayout(1,0));
-		northPane.add(tablePanel);
-		
 	}
-	
+		
 	private class InsertarContactoListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -180,7 +190,5 @@ public class ContactPanel extends JPanel {
 		}
 		
 	}
-	
-	
 
 }

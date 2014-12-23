@@ -1,5 +1,6 @@
 package ubu.lsi.dms.agenda.gui;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import ubu.lsi.dms.agenda.modelo.Contacto;
 import ubu.lsi.dms.agenda.modelo.Llamada;
 import ubu.lsi.dms.agenda.modelo.TipoContacto;
 
-public class TablePanel extends JPanel {
+public class ContactTable extends JTable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -22,32 +23,17 @@ public class TablePanel extends JPanel {
 
 	private JPanel tablePanel;
 
-	public TablePanel(AdaptadorContacto adaptadorContacto) {
+	public ContactTable(AdaptadorContacto adaptadorContacto) {
 
-		
-		tablaPrueba = new JTable(adaptadorContacto);
-
-		tablePanel = new JPanel();
-
-		setLayout(new GridLayout(1, 0));
-		setBorder(new TitledBorder(null, "Tabla", TitledBorder.LEADING,
-				TitledBorder.TOP, null, null));
-
+		super(adaptadorContacto);
 		initComponents();
-		
-	    
-		add(tablePanel);
 
 	}
 
 	private void initComponents() {
 
-		tablePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-		tablePanel.add(tablaPrueba);
-
 	}
 
-	
 	/**
 	 * @return the tablaPrueba
 	 */
@@ -55,6 +41,4 @@ public class TablePanel extends JPanel {
 		return tablaPrueba;
 	}
 
-	
-	
 }

@@ -73,7 +73,7 @@ public class MainWindow extends JFrame {
 						letra = "" + i;
 					}
 					// Creamos un contacto, una llamada y un tipo de contacto
-					TipoContacto contactType = new TipoContacto(i, "TipoDeContacto"
+					TipoContacto contactType = new TipoContacto(i, "Tipo"
 							+ letra);
 					Contacto contact = new Contacto(i, "Nombre" + letra, "Apellidos"
 							+ letra, "Estimado" + letra, "Direccion" + letra, "Ciudad"

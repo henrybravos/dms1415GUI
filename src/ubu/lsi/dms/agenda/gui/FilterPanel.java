@@ -1,5 +1,6 @@
 package ubu.lsi.dms.agenda.gui;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -40,12 +41,13 @@ public class FilterPanel extends JPanel {
 		setLayout(new GridLayout(1, 2));
 		setBorder(new TitledBorder(null, "Filter", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
-
+		setPreferredSize(new Dimension(840,60));
+		
 		initComponents();
 
 		add(optionsPanel);
 		add(buttonsPanel);
-
+		
 	}
 
 	private void initComponents() {
