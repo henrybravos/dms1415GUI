@@ -2,12 +2,14 @@ package ubu.lsi.dms.agenda.gui;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.JTextComponent;
 
 public class FilterPanel extends JPanel {
 
@@ -57,5 +59,46 @@ public class FilterPanel extends JPanel {
 		buttonsPanel.add(filterButton);
 
 	}
+	
+	
 
+	/**
+	 * @return the filterButton
+	 */
+	public JButton getFilterButton() {
+		return filterButton;
+	}
+
+	/**
+	 * @return the clearButton
+	 */
+	public JButton getClearButton() {
+		return clearButton;
+	}
+
+	
+	/**
+	 * @return the filterText
+	 */
+	public JTextField getFilterText() {
+		return filterText;
+	}
+
+	/**
+	 * @return the filterBox
+	 */
+	public JComboBox<String> getFilterBox() {
+		return filterBox;
+	}
+
+	public void setFiltrarContactoListener(ActionListener l) {
+		filterButton.addActionListener(l);
+	}
+
+	public void setLimpiarFiltroContactoListener(ActionListener l) {
+		clearButton.addActionListener(l);
+	}
+
+
+	
 }

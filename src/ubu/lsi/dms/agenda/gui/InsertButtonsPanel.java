@@ -1,6 +1,7 @@
 package ubu.lsi.dms.agenda.gui;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -26,5 +27,10 @@ public class InsertButtonsPanel extends JPanel {
 		add(addButton);
 
 	}
+	
+	public void setInsertarContactoListener(ActionListener l) {
+		addButton.addActionListener(l);
+	}
+	
 
 }

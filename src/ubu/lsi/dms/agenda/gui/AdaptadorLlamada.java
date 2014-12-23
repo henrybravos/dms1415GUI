@@ -59,7 +59,7 @@ public class AdaptadorLlamada extends AbstractTableModel{
 		
 		Iterator<Llamada> iterador = totalLlamadas.iterator();
 		Llamada llamada=null;
-		for (int i = 0; i == arg0; i++) {
+		for (int i = 0; i <= arg0; i++) {
 			llamada = (Llamada) iterador.next();
 		}
 		//Elegimos el atributo deseado indicado

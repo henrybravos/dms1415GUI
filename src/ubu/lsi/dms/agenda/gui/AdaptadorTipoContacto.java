@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import ubu.lsi.dms.agenda.modelo.Contacto;
 import ubu.lsi.dms.agenda.modelo.TipoContacto;
 
 public class AdaptadorTipoContacto extends AbstractTableModel{
@@ -53,7 +54,7 @@ public class AdaptadorTipoContacto extends AbstractTableModel{
 		
 		Iterator<TipoContacto> iterador = totalTipoContacto.iterator();
 		TipoContacto llamada=null;
-		for (int i = 0; i == arg0; i++) {
+		for (int i = 0; i <= arg0; i++) {
 			llamada = (TipoContacto) iterador.next();
 		}
 		//Elegimos el atributo deseado indicado
@@ -73,6 +74,12 @@ public class AdaptadorTipoContacto extends AbstractTableModel{
 		
 	}
 
+	/**
+	 * @return the totalContactos
+	 */
+	public Collection<TipoContacto> getTotalTipoContacto() {
+		return totalTipoContacto;
+	}
 
 
 }

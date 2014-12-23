@@ -1,25 +1,22 @@
 package ubu.lsi.dms.agenda.gui;
 
-import javax.swing.JPanel;
-
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-
-import javax.swing.JLabel;
-
 import java.awt.GridBagConstraints;
-
-import javax.swing.JTextField;
-
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 public class ContactDataPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private JTextField titleField;
 	private JTextField nameField;
 	private JTextField surnameField;
@@ -37,21 +34,29 @@ public class ContactDataPanel extends JPanel {
 	private JTextField notesField;
 	private JTextField faxField;
 	private JTextField emailField;
+	private JComboBox<String> ContactTypeComboBox;
+	
+	private AdaptadorTipoContacto adaptadorTipoContacto;
+	
+
+	private JTable tablaPrueba;
 
 	private GridBagConstraints constraints;
 
 	private JPanel personalInfoPanel;
 	private JPanel workInfoPanel;
 
-	public ContactDataPanel() {
+	public ContactDataPanel(AdaptadorTipoContacto adaptadorTipoContacto) {
 
+		this.adaptadorTipoContacto = adaptadorTipoContacto;
+		
 		setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		setPreferredSize(new Dimension(640, 270));
 
 		initComponents();
-		
+
 		add(personalInfoPanel);
-		
+
 		add(workInfoPanel);
 
 	}
@@ -259,12 +264,37 @@ public class ContactDataPanel extends JPanel {
 
 		// Notes text field
 		notesField = new JTextField(45);
-		setConstraints(1, 3, 9, GridBagConstraints.CENTER,
+		setConstraints(1, 3, 4, GridBagConstraints.CENTER,
 				GridBagConstraints.HORIZONTAL);
 		workInfoPanel.add(notesField, constraints);
+		
+		
+		//TODO
+		// Notes label
+		setConstraints(0, 4, 1, GridBagConstraints.WEST,
+				GridBagConstraints.NONE);
+		workInfoPanel.add(new JLabel("Tipo contacto:"), constraints);
+		
+		//ComboBox
+		ContactTypeComboBox = new JComboBox<String>(cogerTiposDeContacto());
+		setConstraints(5, 4, 3, GridBagConstraints.CENTER,
+				GridBagConstraints.HORIZONTAL);
+		workInfoPanel.add(ContactTypeComboBox);
 
 	} // initPanels
 	
+	
+	
+	private String[] cogerTiposDeContacto(){
+		String[] tiposDeContacto = new String[adaptadorTipoContacto.getRowCount()];
+		
+		for(int i=0;i<adaptadorTipoContacto.getRowCount();i++)
+			tiposDeContacto[i] = (String) adaptadorTipoContacto.getValueAt(i, 1);
+		
+		return tiposDeContacto;
+	}
+	
+
 	/**
 	 * Sets different parameters of the GridBagConstraints instance used in
 	 * GridBagLayout manager.
@@ -275,8 +305,10 @@ public class ContactDataPanel extends JPanel {
 	 *            the row of the GridBagLayout
 	 * @param gridWidth
 	 *            the number of columns that occupies an item in the grid
-	 * @param anchor the position of an item
-	 * @param fill the fill of the item in its display area
+	 * @param anchor
+	 *            the position of an item
+	 * @param fill
+	 *            the fill of the item in its display area
 	 */
 	private void setConstraints(int gridx, int gridy, int gridWidth,
 			int anchor, int fill) {
@@ -287,4 +319,168 @@ public class ContactDataPanel extends JPanel {
 		constraints.fill = fill;
 		constraints.insets = new Insets(0, 0, 5, 5);
 	} // setConstraints
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	/**
+	 * @return the titleField
+	 */
+	public JTextField getTitleField() {
+		return titleField;
+	}
+
+	/**
+	 * @return the nameField
+	 */
+	public JTextField getNameField() {
+		return nameField;
+	}
+
+	/**
+	 * @return the surnameField
+	 */
+	public JTextField getSurnameField() {
+		return surnameField;
+	}
+
+	/**
+	 * @return the addressField
+	 */
+	public JTextField getAddressField() {
+		return addressField;
+	}
+
+	/**
+	 * @return the cityField
+	 */
+	public JTextField getCityField() {
+		return cityField;
+	}
+
+	/**
+	 * @return the provinceField
+	 */
+	public JTextField getProvinceField() {
+		return provinceField;
+	}
+
+	/**
+	 * @return the regionField
+	 */
+	public JTextField getRegionField() {
+		return regionField;
+	}
+
+	/**
+	 * @return the countryField
+	 */
+	public JTextField getCountryField() {
+		return countryField;
+	}
+
+	/**
+	 * @return the postalCodeField
+	 */
+	public JTextField getPostalCodeField() {
+		return postalCodeField;
+	}
+
+	/**
+	 * @return the companyField
+	 */
+	public JTextField getCompanyField() {
+		return companyField;
+	}
+
+	/**
+	 * @return the positionField
+	 */
+	public JTextField getPositionField() {
+		return positionField;
+	}
+
+	/**
+	 * @return the workPhoneField
+	 */
+	public JTextField getWorkPhoneField() {
+		return workPhoneField;
+	}
+
+	/**
+	 * @return the extensionField
+	 */
+	public JTextField getExtensionField() {
+		return extensionField;
+	}
+
+	/**
+	 * @return the mobilePhoneField
+	 */
+	public JTextField getMobilePhoneField() {
+		return mobilePhoneField;
+	}
+
+	/**
+	 * @return the notesField
+	 */
+	public JTextField getNotesField() {
+		return notesField;
+	}
+
+	/**
+	 * @return the faxField
+	 */
+	public JTextField getFaxField() {
+		return faxField;
+	}
+
+	/**
+	 * @return the emailField
+	 */
+	public JTextField getEmailField() {
+		return emailField;
+	}
+
+	/**
+	 * @return the tablaPrueba
+	 */
+	public JTable getTablaPrueba() {
+		return tablaPrueba;
+	}
+
+	/**
+	 * @return the constraints
+	 */
+	public GridBagConstraints getConstraints() {
+		return constraints;
+	}
+
+	/**
+	 * @return the personalInfoPanel
+	 */
+	public JPanel getPersonalInfoPanel() {
+		return personalInfoPanel;
+	}
+
+	/**
+	 * @return the workInfoPanel
+	 */
+	public JPanel getWorkInfoPanel() {
+		return workInfoPanel;
+	}
+
+	/**
+	 * @return the contactTypeComboBox
+	 */
+	public JComboBox<String> getContactTypeComboBox() {
+		return ContactTypeComboBox;
+	}
+
+
+
 }

@@ -23,9 +23,17 @@ public class CallPanel extends JPanel {
 	private String[] filterOptions;
 
 	private InsertButtonsPanel insertButtonsPanel;
+	
+	private AdaptadorTipoContacto adaptadorTipoContacto;
+	private AdaptadorContacto adaptadorContacto;
+	private AdaptadorLlamada adaptadorLlamada;
 
-	public CallPanel() {
+	public CallPanel(AdaptadorContacto adaptadorContacto, AdaptadorLlamada adaptadorLlamada, AdaptadorTipoContacto adaptadorTipoContacto) {
 
+		this.adaptadorContacto = adaptadorContacto;
+		this.adaptadorLlamada = adaptadorLlamada;
+		this.adaptadorTipoContacto = adaptadorTipoContacto;
+		
 		setLayout(new BorderLayout());
 
 		filterOptions = new String[] { "Contact" };

@@ -73,12 +73,10 @@ public class AdaptadorContacto extends AbstractTableModel{
 
 	@Override
 	public Object getValueAt(int arg0, int arg1) {
-	//Conseguimos el contacto deseado
-		
-				
+	//Conseguimos el contacto deseado	
 		Iterator<Contacto> iterador = totalContactos.iterator();
 		Contacto contacto=null;
-		for (int i = 0; i == arg0; i++) {
+		for (int i = 0; i <= arg0; i++) {
 			contacto = (Contacto) iterador.next();
 		}
 		//Elegimos el atributo deseado indicado
@@ -124,6 +122,12 @@ public class AdaptadorContacto extends AbstractTableModel{
 		}
 		return null;
 	}
+
+	public void addRow(Contacto contacto) {
+		totalContactos.add(contacto);
+		
+	}
+
 
 	
 	/*
@@ -203,5 +207,7 @@ public class AdaptadorContacto extends AbstractTableModel{
 		
 	}
 	*/
+	
+	
 	
 }
