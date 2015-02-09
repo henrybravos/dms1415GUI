@@ -135,8 +135,8 @@ public class ContactPanel extends JPanel {
 	
 	public abstract class ContactoListener implements ActionListener{
 		private int idContacto;
-		public ContactoListener(int id){
-			this.idContacto=id;
+		public ContactoListener(int identificacion){
+			this.idContacto=identificacion;
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
