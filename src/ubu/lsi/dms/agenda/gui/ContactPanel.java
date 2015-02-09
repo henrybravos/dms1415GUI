@@ -131,10 +131,12 @@ public class ContactPanel extends JPanel {
 		southPane.add(filterPanel);
 
 	}
+	
+	
 	public abstract class ContactoListener implements ActionListener{
 		private int idContacto;
 		public ContactoListener(int id){
-			this.idContacto=idContacto;
+			this.idContacto=id;
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
