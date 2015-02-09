@@ -74,13 +74,18 @@ public class ContactPanel extends JPanel {
 		southPane = new JPanel();
 
 		initComponents();
+		TableModel modelo = contactTable.getModel();
+		
+		ContactoListener contactoActualizar=new ActualizarContactoListener(IDContactoActualizado),
+				conractoInsertar= new InsertarContactoListener(((AdaptadorContacto) modelo).getHigherID() + 1);
+		
 
 		insertButtonsPanel
-				.setInsertarListener(new InsertarContactoListener());
+				.setInsertarListener(conractoInsertar);
 		insertButtonsPanel
 				.setLimpiarListener(new LimpiarContactoListener());
 		insertButtonsPanel
-				.setActualizarListener(new ActualizarContactoListener());
+				.setActualizarListener(contactoActualizar);
 
 		filterPanel.setFiltrarContactoListener(new FiltrarContactoListener());
 		filterPanel.setLimpiarFiltroContactoListener(new LimpiarFiltroContactoListener());
@@ -126,15 +131,15 @@ public class ContactPanel extends JPanel {
 		southPane.add(filterPanel);
 
 	}
-
-	private class InsertarContactoListener implements ActionListener {
+	public abstract class ContactoListener implements ActionListener{
+		private int idContacto;
+		public ContactoListener(int id){
+			this.idContacto=idContacto;
+		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// Cogemos el modelo de la tabla
-			TableModel modelo = contactTable.getModel();
-			// Para calcular el ID cogemos el ID del último contacto añadido y
-			// le vamos a sumar uno
-			int idContacto = ((AdaptadorContacto) modelo).getHigherID() + 1;
+		
+			int idContacto = this.idContacto;
 			String nombre = contactDataPanel.getNameField().getText();
 			String apellidos = contactDataPanel.getSurnameField().getText();
 			String estimado = contactDataPanel.getTitleField().getText();
@@ -162,7 +167,7 @@ public class ContactPanel extends JPanel {
 					pais, nombreCompania, cargo, telfTrabajo, ExtensionTrabajo,
 					telfMovil, numFax, nomCorreo, notas, tipoContacto);
 
-			adaptadorContacto.addRow(contacto);
+			adaptadorContacto.actualizarRow(contacto);
 
 		}
 
@@ -178,6 +183,24 @@ public class ContactPanel extends JPanel {
 			}
 			return tipoBuscado;
 		}
+	}
+
+
+	private class InsertarContactoListener extends ContactoListener{
+		public InsertarContactoListener(int id) {
+			super(id);
+			// Contruye un ContactoListener con el nuevo ID
+			//Se opta por crear esto por si hay alguna diferencia en el futuro
+			//o más rectricciones ya que ahora se puede hacer con una sola clase
+			//pero esto desacopla y hace la facil reutilizacion
+		}
+	}
+	private class ActualizarContactoListener extends ContactoListener {
+		public ActualizarContactoListener(int id) {
+			super(id);
+			// Actualiza ContactoListener con el nuevo ID
+		}
+
 	}
 
 	private class LimpiarContactoListener implements ActionListener {
@@ -278,60 +301,11 @@ public class ContactPanel extends JPanel {
 		public void mouseReleased(MouseEvent arg0) {
 		}
 	}
+	
 
-	private class ActualizarContactoListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// Cogemos el modelo de la tabla
-			TableModel modelo = contactTable.getModel();
-			// Para calcular el ID cogemos el ID del último contacto añadido y
-			// le vamos a sumar uno
-			int idContacto = IDContactoActualizado;
-			String nombre = contactDataPanel.getNameField().getText();
-			String apellidos = contactDataPanel.getSurnameField().getText();
-			String estimado = contactDataPanel.getTitleField().getText();
-			String direccion = contactDataPanel.getAddressField().getText();
-			String ciudad = contactDataPanel.getCityField().getText();
-			String provincia = contactDataPanel.getProvinceField().getText();
-			String codProv = contactDataPanel.getPostalCodeField().getText();
-			String region = contactDataPanel.getRegionField().getText();
-			String pais = contactDataPanel.getCountryField().getText();
-			String nombreCompania = contactDataPanel.getCompanyField()
-					.getText();
-			String cargo = contactDataPanel.getPositionField().getText();
-			String telfTrabajo = contactDataPanel.getWorkPhoneField().getText();
-			String ExtensionTrabajo = contactDataPanel.getExtensionField()
-					.getText();
-			String telfMovil = contactDataPanel.getMobilePhoneField().getText();
-			String numFax = contactDataPanel.getFaxField().getText();
-			String nomCorreo = contactDataPanel.getEmailField().getText();
-			String notas = contactDataPanel.getNotesField().getText();
 
-			TipoContacto tipoContacto = buscarTipoContacto();
 
-			Contacto contacto = new Contacto(idContacto, nombre, apellidos,
-					estimado, direccion, ciudad, provincia, codProv, region,
-					pais, nombreCompania, cargo, telfTrabajo, ExtensionTrabajo,
-					telfMovil, numFax, nomCorreo, notas, tipoContacto);
-
-			adaptadorContacto.actualizarRow(contacto);
-
-		}
-
-		private TipoContacto buscarTipoContacto() {
-			TipoContacto tipoBuscado = null;
-			java.util.Iterator<TipoContacto> iterador = adaptadorTipoContacto
-					.getTotalTipoContacto().iterator();
-			for (int i = 0; i < adaptadorTipoContacto.getRowCount(); i++) {
-				TipoContacto tipo = iterador.next();
-				if ((String) contactDataPanel.getContactTypeComboBox()
-						.getSelectedItem() == (String) tipo.getTipoContacto())
-					tipoBuscado = tipo;
-			}
-			return tipoBuscado;
-		}
-
-	}
+	
 
 	private class FiltrarContactoListener implements ActionListener {
 
