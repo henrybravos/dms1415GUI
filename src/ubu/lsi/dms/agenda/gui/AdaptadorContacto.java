@@ -124,10 +124,9 @@ public class AdaptadorContacto extends AbstractTableModel{
 	}
 
 	public void addRow(Contacto contacto) {
+		if(!totalContactos.contains(contacto.getIdContacto()))
 		totalContactos.add(contacto);
-		
 	}
-
 	/**
 	 * @return the totalContactos
 	 */

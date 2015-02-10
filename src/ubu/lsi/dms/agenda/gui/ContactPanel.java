@@ -19,34 +19,13 @@ import javax.swing.table.TableRowSorter;
 import ubu.lsi.dms.agenda.modelo.Contacto;
 import ubu.lsi.dms.agenda.modelo.TipoContacto;
 
-public class ContactPanel extends JPanel {
+public class ContactPanel extends MediadorAbstractoPanel{
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
-	private JPanel westPane;
-
-	private JPanel eastPane;
-
-	private JPanel southPane;
-
-	private FilterPanel filterPanel;
-
-	private ContactTable contactTable;
-	private ContactTypeTable contactTypeTable;
-
-	private ContactDataPanel contactDataPanel;
-
-	private String[] filterOptions;
-
-	private InsertButtonsPanel insertButtonsPanel;
-
-	private AddChangeButtonPanel addChangeButtonPanel;
-
-	private AdaptadorTipoContacto adaptadorTipoContacto;
-	private AdaptadorContacto adaptadorContacto;
-	private AdaptadorLlamada adaptadorLlamada;
-	int IDContactoActualizado;
-	int IDTipoContactoActualizado;
 
 	public ContactPanel(AdaptadorContacto adaptadorContacto,
 			AdaptadorLlamada adaptadorLlamada,
@@ -73,17 +52,15 @@ public class ContactPanel extends JPanel {
 		eastPane = new JPanel();
 		southPane = new JPanel();
 
-		
-		ContactoListener contactoActualizar=new ActualizarContactoListener(),
-				conractoInsertar= new InsertarContactoListener(((AdaptadorContacto) contactTable.getModel()).getHigherID() + 1);
+
 		initComponents();
 
 		insertButtonsPanel
-				.setInsertarListener(conractoInsertar);
+				.setInsertarListener(new InsertarContactoListener(((AdaptadorContacto) contactTable.getModel()).getHigherID() + 1));
 		insertButtonsPanel
 				.setLimpiarListener(new LimpiarContactoListener());
 		insertButtonsPanel
-				.setActualizarListener(contactoActualizar);
+				.setActualizarListener(new ActualizarContactoListener());
 
 		filterPanel.setFiltrarContactoListener(new FiltrarContactoListener());
 		filterPanel.setLimpiarFiltroContactoListener(new LimpiarFiltroContactoListener());
@@ -99,7 +76,7 @@ public class ContactPanel extends JPanel {
 
 	}
 
-	private void initComponents() {
+	protected void initComponents() {
 
 		// WEST PANE INITIALIZATION
 		westPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -130,16 +107,7 @@ public class ContactPanel extends JPanel {
 
 	}
 
-	private class InsertarContactoListener extends ContactoListener{
-		int id;
-		public InsertarContactoListener(int id) {
-			this.id=id;
-		}
-		@Override
-		public int getID() {
-			return id;
-		}
-	}
+
 
 	private class LimpiarContactoListener implements ActionListener {
 		@Override
@@ -239,6 +207,8 @@ public class ContactPanel extends JPanel {
 		public void mouseReleased(MouseEvent arg0) {
 		}
 	}
+	
+	
 	public abstract class ContactoListener implements ActionListener{
 	
 		@Override
@@ -289,7 +259,6 @@ public class ContactPanel extends JPanel {
 			return tipoBuscado;
 		}
 	}
-
 	private class ActualizarContactoListener extends ContactoListener {
 		
 		@Override
@@ -297,7 +266,19 @@ public class ContactPanel extends JPanel {
 			return IDContactoActualizado;
 		}
 	}
+	private class InsertarContactoListener extends ContactoListener{
+		int id;
+		public InsertarContactoListener(int id) {
+			this.id=id;
+		}
+		@Override
+		public int getID() {
+			return id;
+		}
+	}
 
+	
+	
 	private class FiltrarContactoListener implements ActionListener {
 
 		@Override

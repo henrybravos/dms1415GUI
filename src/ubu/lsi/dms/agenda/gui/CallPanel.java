@@ -16,30 +16,11 @@ import javax.swing.table.TableModel;
 import ubu.lsi.dms.agenda.modelo.Contacto;
 import ubu.lsi.dms.agenda.modelo.Llamada;
 
-public class CallPanel extends JPanel {
+public class CallPanel extends MediadorAbstractoPanel {
 
 	private static final long serialVersionUID = 1L;
-
-	private JPanel westPane;
-
-	private JPanel southPane;
-	
-	private JPanel eastPane;
-
-	private FilterPanel filterPanel;
-
 	private CallDataPanel callDataPanel;
-
-	private String[] filterOptions;
-	
 	private JTable callsTable;
-
-	private InsertButtonsPanel insertButtonsPanel;
-	
-	private AdaptadorTipoContacto adaptadorTipoContacto;
-	private AdaptadorContacto adaptadorContacto;
-	private AdaptadorLlamada adaptadorLlamada;
-
 	public CallPanel(AdaptadorContacto adaptadorContacto, AdaptadorLlamada adaptadorLlamada, AdaptadorTipoContacto adaptadorTipoContacto) {
 
 		this.adaptadorContacto = adaptadorContacto;
@@ -69,7 +50,7 @@ public class CallPanel extends JPanel {
 		add(eastPane, BorderLayout.CENTER);
 	}
 
-	private void initComponents() {
+	protected void initComponents() {
 
 		// WEST PANE INITIALIZATION
 		westPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
