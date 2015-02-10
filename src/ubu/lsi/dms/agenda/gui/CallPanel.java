@@ -10,8 +10,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import ubu.lsi.dms.agenda.modelo.Contacto;
 import ubu.lsi.dms.agenda.modelo.Llamada;
@@ -20,7 +22,7 @@ public class CallPanel extends MediadorAbstractoPanel {
 
 	private static final long serialVersionUID = 1L;
 	private CallDataPanel callDataPanel;
-	private JTable callsTable;
+	
 	public CallPanel(AdaptadorContacto adaptadorContacto, AdaptadorLlamada adaptadorLlamada, AdaptadorTipoContacto adaptadorTipoContacto) {
 
 		this.adaptadorContacto = adaptadorContacto;
@@ -36,7 +38,8 @@ public class CallPanel extends MediadorAbstractoPanel {
 		callsTable = new JTable(adaptadorLlamada);
 		
 		insertButtonsPanel.setInsertarListener(new InsertarLlamadaListener());
-		
+
+		filterPanel.setFiltrarContactoListener(new FiltrarLlamadaListener());
 		
 
 		westPane = new JPanel();
@@ -106,7 +109,25 @@ public class CallPanel extends MediadorAbstractoPanel {
 			}
 			return buscado;
 		}
+		
 	}
+	
+	//Filtrar por Contacto
+	private class FiltrarLlamadaListener implements ActionListener{
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			
+			TableRowSorter<AdaptadorLlamada> contactosFiltradosApellido = new TableRowSorter<AdaptadorLlamada>(
+					adaptadorLlamada);
+			callsTable.setRowSorter(contactosFiltradosApellido);
+			contactosFiltradosApellido.setRowFilter(RowFilter.regexFilter(
+					filterPanel.getFilterText().getText(), 1));
+
+		}
+	}
+
+
 	
 	
 	
